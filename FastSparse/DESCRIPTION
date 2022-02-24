@@ -1,0 +1,26 @@
+Package: FastSparse
+Type: Package
+Title: Fast Sparse Classification for Generalized Linear and Additive Models
+Version: 0.1.0
+Date: 2022-02-17
+Author: @R: c(
+    person("Jiachang", "Liu", email = "jiachang.liu@duke.edu", role = c("aut", "cre")),
+    person("Chudi", "Zhong", email = "chudi.zhong@duke.edu", role = c("aut")),
+    person("Margo", "Seltzer", email = "mseltzer@cs.ubc.ca", role = "aut"),
+    person("Cynthia", "Rudin", email = "cynthia@cs.duke.edu", role = "aut"))
+Maintainer: Jiachang Liu <jiachang.liu@duke.edu>
+Description: We provide a toolkit for producing sparse and interpretable generalized linear and additive models for the binary classiciation task by solving the L0-regularized problems.
+    The classiciation loss can be either the logistic loss or the exponential loss.
+    The algorithms can produce high quality (swap 1-OPT) solutions and are generally 2 to 5 times faster than previous approaches.
+    We propose several techniques to achieve this computational speedup.
+    For fast sparse logistic regression, we propose to use linear and quadratic surrogate cuts that allow us to efficiently screen features for elimination, as well as use of a priority queue that favors a more uniform exploration of features.
+    As an alterantive to the logistic loss, we propose the exponential loss, which permits an analytical solution to the line search at each iteration.
+    For more details, check the paper Fast Sparse Classification for Generalized Linear and Additive Models by Liu, Zhong, Seltzer, and Rudin (AISTATS 2022).
+URL: https://github.com/jiachangliu/fastSparse
+License: MIT + file LICENSE
+Depends: R (>= 3.3.0)
+SystemRequirements: C++11
+Imports: Rcpp (>= 1.0.8), Matrix, methods, ggplot2, reshape2, MASS
+LinkingTo: Rcpp, RcppArmadillo
+NeedsCompilation: yes
+RoxygenNote: 7.1.2

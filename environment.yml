@@ -1,0 +1,25 @@
+name: fastSparse_environment
+channels:
+  - conda-forge
+  - r
+dependencies:
+  - python=3.8
+  - numpy
+  - matplotlib
+  - pandas
+  - notebook
+  - r-base
+  - r-essentials
+  - tqdm
+  - scipy
+  - rclone
+  - scikit-learn
+  - seaborn
+  - jupyterlab
+  - rpy2
+  - seaborn
+  - numba
+  - htop
+  - gperftools
+  - autoconf
+  - ipympl
