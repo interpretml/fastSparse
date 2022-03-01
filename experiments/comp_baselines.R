@@ -42,14 +42,6 @@ fs = function(dataset, data_type, penalty_type, gammas, X_train, y_train,
         if (ell=="Exponential"){
           intercept = beta[1]
           b = beta[2:length(beta)]
-          # pred_train = predict(fit, newx=X_train, lambda=lamb, gamma=g)
-          # pred_test = predict(fit, newx=X_test, lambda=lamb, gamma=g)
-
-          # acc_train = get_acc(y_train, pred_train)
-          # acc_test = get_acc(y_test, pred_test)
-
-          # exp_loss_train = sum(exp(y_train*(0.5*log(pred_train/(1-pred_train)))))
-          # exp_loss_test = sum(exp(y_test*(0.5*log(pred_test/(1-pred_test)))))
 
           pred_train =  rep(1, dim(X_train)[1])
           f_train = X_train %*% b + intercept
@@ -98,10 +90,8 @@ fs = function(dataset, data_type, penalty_type, gammas, X_train, y_train,
           normCenteredX = get_norm_from_centeredX(X_train)
 
           if (fit$penalty == "L0L2"){
-            # penalty_term = lamb * fit$suppSize[[1]][i] + g * sqrt(sum(beta[beta != 0]^2))
             penalty_term = lamb * fit$suppSize[[1]][i] + g * sum((b[b != 0]*normCenteredX[b != 0])^2)
           } else if (fit$penalty == "L0L1") {
-            # penalty_term = lamb * fit$suppSize[[1]][i] + g * sum(abs(beta[beta != 0]))
             penalty_term = lamb * fit$suppSize[[1]][i] + g * sum(abs(b[b != 0]*normCenteredX[b != 0]))
           } else {
             penalty_term = lamb * fit$suppSize[[1]][i]
@@ -128,7 +118,7 @@ l0learn = function(dataset, data_type, penalty_type, gammas, X_train, y_train,
   print(paste("train model", penalty_type, sep=" "))
   n = dim(X_train)[1]
   p = dim(X_train)[2]
-  if (penalty_type != "L0") { # check
+  if (penalty_type != "L0") {
     gammas = gammas
   } else {
     gammas = c(0)
@@ -144,7 +134,7 @@ l0learn = function(dataset, data_type, penalty_type, gammas, X_train, y_train,
     for (i in 1:lengths(fit$lambda)){
       lamb = fit$lambda[[1]][i]
       beta = as.vector(coef(fit, lambda=lamb, gamma=g)) # first element is intercept
-      if (length(beta) != p+1){ # high correlation dataset
+      if (length(beta) != p+1){ 
         if (data_type == "real"){
           out= c(dataset, data_type, binary, fold, n, p, "l0learn", penalty_type, lamb, g, NA,
                  fit$suppSize[[1]][i], NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, train_duration, "\n")
@@ -200,11 +190,11 @@ lasso = function(dataset, data_type, X_train, y_train, X_test, y_test,
   
     for (i in 1:length(model$lambda)){
       lamb = model$lambda[i]
-      pred_train = predict(model, newx=X_train, s= lamb) # glmnet.predict
+      pred_train = predict(model, newx=X_train, s= lamb) 
       pred_test = predict(model, newx=X_test, s= lamb)
     
       beta = as.vector(coef(model, s=model$lambda[i]))
-      penalty_term = lamb * sum(abs(beta[beta != 0])) # l1 loss, glmnet package get l1 penlaty
+      penalty_term = lamb * sum(abs(beta[beta != 0])) 
 
       results = get_results(beta, pred_train, pred_test, X_train, y_train, X_test, y_test, 
                       data_type, B, penalty_term, train_duration, sim_seed)

@@ -1,8 +1,6 @@
 source("utils.R")
 library(L0Learn)
 library(FastSparse)
-library(FastSparseQuadCut)
-library(FastSparseLinCut)
 library(dplyr)
 library(reticulate)
 
@@ -42,14 +40,6 @@ fs = function(dataset, data_type, penalty_type, lambs, gammas, X_train, y_train,
           if (ell=="Exponential"){
             intercept = beta[1]
             b = beta[2:length(beta)]
-            # pred_train = predict(fit, newx=X_train, lambda=lamb, gamma=g)
-            # pred_test = predict(fit, newx=X_test, lambda=lamb, gamma=g)
-
-            # acc_train = get_acc(y_train, pred_train)
-            # acc_test = get_acc(y_test, pred_test)
-
-            # exp_loss_train = sum(exp(y_train*(0.5*log(pred_train/(1-pred_train)))))
-            # exp_loss_test = sum(exp(y_test*(0.5*log(pred_test/(1-pred_test)))))
 
             pred_train =  rep(1, dim(X_train)[1])
             f_train = X_train %*% b + intercept
@@ -100,10 +90,8 @@ fs = function(dataset, data_type, penalty_type, lambs, gammas, X_train, y_train,
             normCenteredX = get_norm_from_centeredX(X_train)
 
             if (fit$penalty == "L0L2"){
-              # penalty_term = lamb * fit$suppSize[[1]][i] + g * sqrt(sum(beta[beta != 0]^2))
               penalty_term = lamb * fit$suppSize[[1]][i] + g * sum((b[b != 0]*normCenteredX[b != 0])^2)
             } else if (fit$penalty == "L0L1") {
-              # penalty_term = lamb * fit$suppSize[[1]][i] + g * sum(abs(beta[beta != 0]))
               penalty_term = lamb * fit$suppSize[[1]][i] + g * sum(abs(b[b != 0]*normCenteredX[b != 0]))
             } else {
               penalty_term = lamb * fit$suppSize[[1]][i]
@@ -170,10 +158,8 @@ l0learn = function(dataset, data_type, penalty_type, lambs, gammas, X_train, y_t
           normCenteredX = get_norm_from_centeredX(X_train)
 
           if (fit$penalty == "L0L2"){
-            # penalty_term = lamb * fit$suppSize[[1]][i] + g * sqrt(sum(beta[beta != 0]^2))
             penalty_term = lamb * fit$suppSize[[1]][i] + g * sum((b[b != 0]*normCenteredX[b != 0])^2)
           } else if (fit$penalty == "L0L1") {
-            # penalty_term = lamb * fit$suppSize[[1]][i] + g * sum(abs(beta[beta != 0]))
             penalty_term = lamb * fit$suppSize[[1]][i] + g * sum(abs(b[b != 0]*normCenteredX[b != 0]))
           } else {
             penalty_term = lamb * fit$suppSize[[1]][i]
