@@ -262,8 +262,6 @@ comp_mb_perf = function(dataset, binary, data_type, LogFile, algorithm, ell=NULL
     lasso(dataset, data_type, X_train, y_train, X_test, y_test, LogFile, B, sim_seed, binary, fold)
   } else if (algorithm=='MCP'){
     mcp(dataset, data_type, X_train, y_train, X_test, y_test, LogFile, B, sim_seed, binary, fold)
-  } else if (algorithm=='abess'){
-    abess_model(dataset, data_type, X_train, y_train, X_test, y_test, LogFile, B, sim_seed, binary, fold)
   }
 }
 
