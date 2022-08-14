@@ -2,7 +2,7 @@ source("comp_baselines.R")
 
 # Figure 5
 # run real dataset
-dataset = "compas"
+dataset = "fico" #"compas"
 data_type = "real"
 binary = TRUE
 folds = c(0, 1, 2, 3, 4)

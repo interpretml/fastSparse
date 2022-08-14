@@ -108,10 +108,20 @@ for (i in 1:lengths(fit$lambda)){
 ```
 
 ## 3. Experiment Replication
-To replicate our experimental results, please go the following [folder](./experiments). The folder is currently under construction, and experimental scripts are being cleaned; please check back in a few days!
+To replicate our experimental results, please go the following [folder](./experiments).
 
-<!-- ## Citing Our Work ##
+## 4. Step Function Visualization
+To reproduce the step function plots shown in the paper, please go the following [folder](./visualization).
+
+## Citing Our Work ##
 If you find our work useful in your research, please consider citing the following paper:
 
 ```
-} -->
+@inproceedings{liu2022fast,
+  title={Fast Sparse Classification for Generalized Linear and Additive Models},
+  author={Liu, Jiachang and Zhong, Chudi and Seltzer, Margo and Rudin, Cynthia},
+  booktitle={International Conference on Artificial Intelligence and Statistics},
+  pages={9304--9333},
+  year={2022},
+  organization={PMLR}
+}

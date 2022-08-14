@@ -1,7 +1,7 @@
 source("comp_time.R")
 
 # Figure 3
-dataset = "compas"
+dataset = "fico" # "compas"
 data_type = "real"
 binary = TRUE
 folds = c(0, 1, 2, 3, 4)
