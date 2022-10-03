@@ -119,7 +119,8 @@ Rcpp::List _FastSparseFit(const T& X, const arma::vec& y, const std::string Loss
                                     Rcpp::Named("SuppSize") = G.NnzCount,
                                     Rcpp::Named("beta") = Bs,
                                     Rcpp::Named("a0") = G.Intercepts,
-                                    Rcpp::Named("Converged") = G.Converged);
+                                    Rcpp::Named("Converged") = G.Converged,
+                                    Rcpp::Named("Objectives") = G.Objectives);
   
   return l;
   
