@@ -30,6 +30,7 @@ class Grid {
         std::vector< std::vector<arma::sp_mat> > Solutions;
         std::vector< std::vector<double> >Intercepts;
         std::vector< std::vector<bool> > Converged;
+        std::vector< std::vector<double> > Objectives;
 
         Grid(const T& X, const arma::vec& y, const GridParams<T>& PG);
         //~Grid();

@@ -49,6 +49,7 @@ void Grid<T>::Fit() {
     Solutions = std::vector< std::vector<arma::sp_mat> >(G.size());
     Intercepts = std::vector< std::vector<double> >(G.size());
     Converged = std::vector< std::vector<bool> >(G.size());
+    Objectives = std::vector< std::vector<double> >(G.size());
 
     for (std::size_t i=0; i<G.size(); ++i) {
         if (PG.P.Specs.L0L1){ 
@@ -70,6 +71,8 @@ void Grid<T>::Fit() {
                 Converged[i].push_back(false);
             }
             
+            Objectives[i].push_back(g->Objective);
+
             beta_vector B_unscaled;
             double b0;
             

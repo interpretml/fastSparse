@@ -62,6 +62,8 @@
 #' corresponding to the ith gamma value.}
 #' \item{converged}{This is a list of sequences for checking whether the algorithm has converged at every grid point. The ith element of the list is a sequence
 #' corresponding to the ith value of gamma, where the jth element in each sequence indicates whether the algorithm has converged at the jth value of lambda.}
+#' \item{objective}{This is a list of sequences for checking the objective function of the algorithm at every grid point. The ith element of the list is a sequence
+#' corresponding to the ith value of gamma, where the jth element in each sequence indicates the objective for the jth value of lambda.}
 #'
 #' @examples
 #' # Generate synthetic data for this example
@@ -302,7 +304,7 @@ FastSparse.fit <- function(x, y, loss="SquaredError", penalty="L0", algorithm="C
 			}
 	}
 
-	G <- list(beta = M$beta, lambda=lapply(M$lambda,signif, digits=6), a0=M$a0, converged = M$Converged, suppSize= M$SuppSize, gamma=M$gamma, penalty=penalty, loss=loss, settings = settings)
+	G <- list(beta = M$beta, lambda=lapply(M$lambda,signif, digits=6), a0=M$a0, converged = M$Converged, suppSize= M$SuppSize, gamma=M$gamma, penalty=penalty, loss=loss, settings = settings, objectives = M$Objectives)
 
 
 	if (is.null(colnames(x))){
