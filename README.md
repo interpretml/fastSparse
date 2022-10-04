@@ -20,10 +20,10 @@ To install this R package, please go to the [installation folder](./installation
 We provide a toolkit for producing sparse and interpretable generalized linear and additive models for the binary classiciation task by solving the L0-regularized problems. The classiciation loss can be either the logistic loss or the exponential loss. The algorithms can produce high quality (swap 1-OPT) solutions and are generally 2 to 5 times faster than previous approaches.
 
 ### 2.1 R Interface
-To understand how to use this R package, please go to the [application and usage R interface folder](./application_and_usage_R_interface).
+To understand how to use this R package, please go to the [application_and_usage_R_interface_folder](./application_and_usage_R_interface).
 
 ### 2.2 Python Interface
-To understand how to use this package in a python environment, we provide a python wrapper to acheive this. Please go to the [application and usage python interface folder](./application_and_usage_python_interface).
+To understand how to use this package in a python environment, we provide a python wrapper to acheive this. Please go to the [application_and_usage_python_interface_folder](./application_and_usage_python_interface).
 
 
 ## 3. Experiment Replication
