@@ -5,13 +5,15 @@ This repository contains source code to our AISTATS 2022 paper:
 * [Fast Sparse Classification for Generalized Linear and Additive Models](https://arxiv.org/abs/2202.11389)
 
 ---
-## 2. Application and Usage
+## 2. Application and Usage - R Interface
 We provide a toolkit for producing sparse and interpretable generalized linear and additive models for the binary classiciation task by solving the L0-regularized problems. The classiciation loss can be either the logistic loss or the exponential loss. The algorithms can produce high quality (swap 1-OPT) solutions and are generally 2 to 5 times faster than previous approaches.
+
+**To use fastSparse directly in a python environment, please go to the folder [application_and_usage_python_interface](../application_and_usage_python_interface).**
 
 ### 2.1 Logistic Regression
 For fast sparse logistic regression, we propose to use linear/quadratic surrogate cuts that allow us to efficiently screen features for elimination, as well as use of a priority queue that favors a more uniform exploration of features.
 
-If you inside FastSparse_0.1.0.tar.gz, the proposed linear/quadratic surrogate cuts and priority queue techniques can be found in "src/CDL012LogisticSwaps.cpp".
+If you go inside FastSparse_0.1.0.tar.gz, the proposed linear/quadratic surrogate cuts and priority queue techniques can be found in "src/CDL012LogisticSwaps.cpp".
 
 To fit a single pair (&lambda;0=3.0, &lambda;2=0.001) regularization and extract the coefficients, you can use the following code in your Rscript:
 ```
@@ -50,7 +52,7 @@ library(FastSparse)
 fit <- FastSparse.fit(X_train, y_train, loss="Exponential", algorithm="CDPSI", penalty="L0L2", nGamma=1, gammaMin=0.00001, gammaMax=0.001)
 for (i in 1:lengths(fit$lambda)){
     lamb = fit$lambda[[1]][i]
-    beta = as.vector(coef(fit, lambda=lamb, gamma=0.001)) # first element is intercept
+    beta = as.vector(coef(fit, lambda=lamb, gamma=0.00001)) # first element is intercept
 ```
 
 Note that for the above two examples, the internal code actually does not impose &lambda;2 regularization for the exponential loss (please refer to Section 4 in our paper for the detailed reason). The "gamma=0.00001" only serves as a placeholder so that we can extract the coefficient correctly.
