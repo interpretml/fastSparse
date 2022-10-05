@@ -10,6 +10,11 @@ We plan to build our own pipeline and further extend this work before pushing th
 
 If you encounter any problem with installation or usage, please don't hesitate to reach out to the following email address: jiachang.liu@duke.edu.
 
+## Package Development ToDo List
+- [ ] Add language specification to codeblock in README.
+- [ ] Add preprocessing function and provide usage in jupyter notebook.
+- [ ] Fix windows installation issues.
+
 ---
 ## 1. Installation ##
 
