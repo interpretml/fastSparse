@@ -1,5 +1,6 @@
 FastSparse_0.1.0.tar.gz
-visualization/fico_bin.csv
+step_function_visualization/fico_bin.csv
+step_function_visualization/spambase_continuous.csv
 usingRInsidePython.ipynb
 
 #################### notebook gitignore template
