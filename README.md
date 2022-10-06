@@ -35,7 +35,7 @@ To understand how to use this package in a python environment, we provide a pyth
 To replicate our experimental results shown in the paper, please go to the [experiments folder](./experiments).
 
 ## 4. Step Function Visualization
-To reproduce the step function plots shown in the paper, please go to the [visualization folder](./step_function_visualization).
+To reproduce the step function plots shown in the paper, please go to the [step_function_visualization folder](./step_function_visualization).
 
 ## Citing Our Work ##
 If you find our work useful in your research, please consider citing the following paper:
