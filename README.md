@@ -12,8 +12,8 @@ If you encounter any problem with installation or usage, please don't hesitate t
 
 ## Package Development ToDo List
 - [ ] Add language specification to codeblock in README.
-- [ ] Add preprocessing function and provide usage in jupyter notebook.
 - [ ] Fix windows installation issues.
+- [x] Add binarization preprocessing function and provide usage in jupyter notebook.
 
 ---
 ## 1. Installation ##
