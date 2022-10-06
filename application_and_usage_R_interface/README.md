@@ -16,14 +16,14 @@ For fast sparse logistic regression, we propose to use linear/quadratic surrogat
 If you go inside FastSparse_0.1.0.tar.gz, the proposed linear/quadratic surrogate cuts and priority queue techniques can be found in "src/CDL012LogisticSwaps.cpp".
 
 To fit a single pair (&lambda;0=3.0, &lambda;2=0.001) regularization and extract the coefficients, you can use the following code in your Rscript:
-```
+```r
 library(FastSparse)
 fit <- FastSparse.fit(X_train, y_train, loss="Logistic", algorithm="CDPSI", penalty="L0L2", autoLambda=FALSE, lambdaGrid=list(3.0), nGamma=1, gammaMin=0.001, gammaMax=0.001)
 beta = as.vector(coef(fit, lambda=3.0, gamma=0.001)) # first element is intercept
 ```
 
 To fit a full regularization path with just a single (&lambda;2=0.001) regularization (the algorithm will automatically pick appropriate &lambda;0 values) and extract all coefficients along this regularization path, you can use the following code in your Rscript:
-```
+```r
 library(FastSparse)
 fit <- FastSparse.fit(X_train, y_train, loss="Logistic", algorithm="CDPSI", penalty="L0L2", nGamma=1, gammaMin=0.001, gammaMax=0.001)
 for (i in 1:lengths(fit$lambda)){
@@ -40,14 +40,14 @@ One caveat of using the exponential loss is that make sure your X_train feature 
 If you inside FastSparse_0.1.0.tar.gz, the proposed exponential loss implementations can be found in "src/include/CDL012Exponential.h", "src/include/CDL012ExponentialSwaps.h", and "src/CDL012ExponentialSwaps.cpp".
 
 Like the logistic loss shown above, to fit a single (&lambda;0=3.0) regularization and extract the coefficients, you can use the following code in your Rscript:
-```
+```r
 library(FastSparse)
 fit <- FastSparse.fit(X_train, y_train, loss="Exponential", algorithm="CDPSI", penalty="L0L2", autoLambda=FALSE, lambdaGrid=list(3.0), nGamma=1, gammaMin=0.001, gammaMax=0.001)
 beta = as.vector(coef(fit, lambda=3.0, gamma=0.001)) # first element is intercept
 ```
 
 To fit a full regularization path (the algorithm will automatically pick appropriate &lambda;0 values) and extract all coefficients along this regularization path, you can use the following code in your Rscript:
-```
+```r
 library(FastSparse)
 fit <- FastSparse.fit(X_train, y_train, loss="Exponential", algorithm="CDPSI", penalty="L0L2", nGamma=1, gammaMin=0.00001, gammaMax=0.001)
 for (i in 1:lengths(fit$lambda)){
@@ -63,7 +63,7 @@ Although our method is designed for classification problems, our proposed dynami
 If you inside FastSparse_0.1.0.tar.gz, the proposed priority queue technique is implemented in "src/include/CDL012Swaps".
 
 To fit a full regularization path with just a single (&lambda;2=0.001) regularization (the algorithm will automatically pick appropriate &lambda;0 values) and extract all coefficients along this regularization path, you can use the following code in your Rscript:
-```
+```r
 fit <- FastSparse.fit(X_train, y_train, penalty="L0L2", algorithm="CDPSI", maxSuppSize = 300, autoLambda=False, nGamma = 1, gammaMin = 0.001, gammaMax = 0.001)
 for (i in 1:lengths(fit$lambda)){
     lamb = fit$lambda[[1]][i]
