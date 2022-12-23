@@ -25,12 +25,12 @@ FasterRisk is already in python implementation and published on PyPI. The main e
 Summary of differences between FastSparse and FasterRisk:
 | Key Differences      | FastSparse | FasterRisk     |
 | :---        |    :----   |         :--- |
-| how sparsity is controlled      | implicitly by $\ell_0$ regularization       | explicitly by support size $k$   |
+| sparsity is controlled      | implicitly by $\ell_0$ regularization       | explicitly by support size $k$   |
 |objective function| $\mathcal{L}(\beta) = \sum_i^n l(y_i, x_i, \beta) + \lambda_2 \Vert \beta \Vert _2^2 + \lambda_0 \Vert \beta \Vert _0$ | <p> $\mathcal{L}(\beta) = \sum_i^n l(y_i, x_i, \beta)$ <p> subject to $\Vert \beta \Vert _0 \leq k$ |
 | model options   | <p> Linear Regression <p> Logistic Regression <p> Adaboost (Note: $\lambda_2$ must be $0$) | Logistic Regression      |
-| allow continuous coefficient | &check; | &cross; (not yet; can be done easily) |
-| allow integer coefficient | &cross; | &check; |
-| allow bound on coefficient| &cross; (not yet; can be done with effort) | &check; |
+| continuous coefficient | &check; | &cross; (not yet; can be done easily) |
+| integer coefficient | &cross; | &check; |
+| bound on coefficient| &cross; (not yet; can be done with effort) | &check; |
 
 
 ## Loss functions for different models:
