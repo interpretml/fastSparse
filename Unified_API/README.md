@@ -5,6 +5,8 @@
 - [API - Sparse Additive Models](#api---sparse-additive-models)
   - [FastSparse:](#fastsparse)
     - [1. Fit on Data](#1-fit-on-data)
+      - [1a. Fit with No Monotonicity Constraint](#1a-fit-with-no-monotonicity-constraint)
+      - [1b. Fit with Monotonicity Constraint](#1b-fit-with-monotonicity-constraint)
     - [2. Get Parameters after Fitting](#2-get-parameters-after-fitting)
     - [3. Predict](#3-predict)
   - [FasterRisk](#fasterrisk)
@@ -49,20 +51,39 @@ import SparseAdditiveModels as SAM
 
 ## FastSparse:
 ### 1. Fit on Data
+#### 1a. Fit with No Monotonicity Constraint
 Fit with a specified $(\lambda_2, \lambda_0)$ pair.
 ```python
-sam = SAM.FastSparse_fit(X=X_train, y=y_train, loss="Square", lambda2=lambda2, lambda0=lambda0)
+# X_trian.shape = (n, p), y_train.shape = (n, ), lambda2 and lambda0 are scalars
+sam = SAM.FastSparse_fit(X=X_train, y=y_train, loss="Square", lambda2=lambda2, lambda0=lambda0) # loss can also be "Logistic" or "Exponential" 
 ```
 
 Fit with a specified $\lambda_2$ value and maximum support size $k$. The algorithm will fit a regularization path with different $\lambda_0$ values (chosen automatically) from large to small until the support size exceeds $k$.
 ```python
+# X_trian.shape = (n, p), y_train.shape = (n, ), lambda2 and k are scalars
 sam = SAM.FastSparse_fit_path(X=X_train, y=y_train, loss="Square", lambda2=lambda2, maxSupp=k) # loss can also be "Logistic" or "Exponential"
+```
+
+#### 1b. Fit with Monotonicity Constraint
+To impose monotonicity constraint, we can achieve this by adding lower and upper bounds on the coefficients. For example, to constrain a coefficient to be positive, we set the lower bound to be 0, and the upper bound to be a very large number like $1 \times 10^6$.
+
+Fit with a specified $(\lambda_2, \lambda_0)$ pair and lower and upper bounds on each coefficient.
+```python
+# X_trian.shape = (n, p), y_train.shape = (n, ), lambda2 and lambda0 are scalars, coeff_low.shape = (p, ), coeff_high.shape = (p, )
+sam = SAM.FastSparse_fit(X=X_train, y=y_train, loss="Square", lambda2=lambda2, lambda0=lambda0, coeffs_low=coeff_low, coeff_high=coeff_high)
+```
+
+Fit with a specified $\lambda_2$ value, maximum support size $k$, and lower and upper bounds on each coefficient. The algorithm will fit a regularization path with different $\lambda_0$ values (chosen automatically) from large to small until the support size exceeds $k$.
+```python
+# X_trian.shape = (n, p), y_train.shape = (n, ), lambda2 and k are scalars, coeff_low.shape = (p, ), coeff_high.shape = (p, )
+sam = SAM.FastSparse_fit_path(X=X_train, y=y_train, loss="Square", lambda2=lambda2, maxSupp=k, coeff_low=coeff_low, coeff_high=coeff_high) # loss can also be "Logistic" or "Exponential"
 ```
 
 ### 2. Get Parameters after Fitting
 ```python
 print("training time is {}".format(sam.train_duration))
 for model in sam.models :
+        # coeff.shape = (p, ), intercept, lambda2 and lambda0 are scalars
         coeff, intercept, lambda2, lambda0 = model.coeff_ model.intercept, lambda2, lambda0
         print("The coefficients are {}; the intercept is {}; lambda2 is {}; lambda0 is {}".format(coeff, intercept, lambda2, lambda0))
 ```
@@ -70,6 +91,7 @@ for model in sam.models :
 ### 3. Predict
 ```python
 for model in sam.models:
+        # X_test.shape = (n_test, p), y_test.shape = (n_test, )
         y_test = model.predict(X=X_test)
 ```
 
@@ -77,11 +99,13 @@ for model in sam.models:
 ### 1. Fit on Data
 Fit with a specified support size $k$, a coefficient lower bound coeff$_{low}$, and a coefficient upper bound coeff$_{high}$ with **continuous** coefficients
 ```python
+# X_train.shape = (n, p), y_train.shape = (n, ), k is a scalar, coeff_low.shape = (p, ), coeff_high.shape = (p, )
 sam = SAM.FastSparse_fit(X=X_train, y=y_train, suppSize=k, coeff_low=coeff_low, coeff_high=coeff_high, coefficient_type="continuous")
 ```
 
 Fit with a specified support size $k$, a coefficient lower bound coeff$_{low}$, and a coefficient upper bound coeff$_{high}$ with **integer** coefficients
 ```python
+# X_train.shape = (n, p), y_train.shape = (n, ), k is a scalar, coeff_low.shape = (p, ), coeff_high.shape = (p, )
 sam = SAM.FastSparse_fit(X=X_train, y=y_train, suppSize=k, coeff_low=coeff_low, coeff_high=coeff_high, coefficient_type="integer")
 ```
 
@@ -91,6 +115,7 @@ sam = SAM.FastSparse_fit(X=X_train, y=y_train, suppSize=k, coeff_low=coeff_low, 
 ```python
 print("training time is {}".format(sam.train_duration))
 for model in sam.models :
+        # coeff.shape = (p, ), intercept and multiplier are scalars
         coeff, intercept, multiplier = model.coeff_ model.intercept, lambda2, lambda0
         print("The coefficients are {}; the intercept is {}; the multiplier is {}".format(coeff, intercept, multiplier))
 ```
@@ -98,5 +123,6 @@ for model in sam.models :
 ### 3. Predict
 ```python
 for model in sam.models:
+        # X_test.shape = (n_test, p), y_test.shape = (n_test, )
         y_test = model.predict(X=X_test)
 ```
