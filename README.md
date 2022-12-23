@@ -29,7 +29,7 @@ To reproduce the step function plots shown in the paper, please go to the [step_
 ## 5. Citing Our Work ##
 If you find our work useful in your research, please consider citing the following paper:
 
-```
+```bibTex
 @inproceedings{liu2022fast,
   title={Fast Sparse Classification for Generalized Linear and Additive Models},
   author={Liu, Jiachang and Zhong, Chudi and Seltzer, Margo and Rudin, Cynthia},
@@ -38,12 +38,12 @@ If you find our work useful in your research, please consider citing the followi
   year={2022},
   organization={PMLR}
 }
+```
 
 Acknowledgement: For this AISTATS camera ready code repository, we build our method based on [L0Learn](https://github.com/hazimehh/L0Learn#l0learn-fast-best-subset-selection)’s codebase, so that we could use its preprocessing steps, and the pipeline for running the full regularization path of $λ_0$ values. Therefore, the computational speedup shown in our paper solely comes from our new proposed algorithms.
 
 We plan to build our own pipeline and further extend this work before pushing the project to CRAN. Right now you can install the project from GitHub directly. Our repository will be actively maintained, and the most updated version can be found at this current GitHub page.
 
-If you encounter any problem with installation or usage, please don't hesitate to reach out to the following email address: jiachang.liu@duke.edu.
 
 ## Package Development ToDo List
 - [ ] Fix windows installation issues.
