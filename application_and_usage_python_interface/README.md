@@ -4,6 +4,15 @@ This repository contains source code to our AISTATS 2022 paper:
 
 * [Fast Sparse Classification for Generalized Linear and Additive Models](https://arxiv.org/abs/2202.11389)
 
+Update (09/17/23): We have created a new python package called [FastSparseGAMS](https://github.com/ubc-systopia/L0Learn/tree/master/python). Instead of using a python wrapper as stated below, you can now install FastSparse via pip directly through the following commands:
+
+```bash
+pip install fastsparsegams
+```
+
+Please go to FastSparseGAM's [tutorial page](https://github.com/ubc-systopia/L0Learn/blob/master/python/tutorial_example/example.py) for examples on how to use the new interface.
+
+The instructions (Section 2) below still work, but we recommand using the new python package first.
 
 ## 2. Application and Usage - Python Interface
 **We provide a wrapper to use fastSparse in a python environment**
